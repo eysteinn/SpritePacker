@@ -15,20 +15,35 @@ Lightweight sprite atlas packer implemented with the MaxRects heuristic. Support
 
 ### Command Line
 
-Pack sprites from the command line using `python -m SpritePacker`:
+Pack sprites from the command line. You can use either method:
+
+**Method 1: Direct script (no installation required)**
+```bash
+# Clone and run directly
+git clone https://github.com/eysteinn/SpritePacker.git
+cd SpritePacker
+python spritepacker.py --input sprites/ --output atlas.png --metadata atlas.json
+```
+
+**Method 2: Module mode (after installation)**
+```bash
+python -m SpritePacker --input sprites/ --output atlas.png --metadata atlas.json
+```
+
+Both methods support the same arguments:
 
 ```bash
 # Pack a folder of images into a 1024x1024 atlas
-python -m SpritePacker --input sprites/ --output atlas.png --metadata atlas.json
+python spritepacker.py --input sprites/ --output atlas.png --metadata atlas.json
 
 # Pack with custom settings and extrude mode
-python -m SpritePacker -i sprites/ -o atlas.png -m atlas.yaml --width 2048 --height 2048 --padding 4 --extrude
+python spritepacker.py -i sprites/ -o atlas.png -m atlas.yaml --width 2048 --height 2048 --padding 4 --extrude
 
 # Add specific images
-python -m SpritePacker --image hero.png --image enemy.png -o atlas.png -m atlas.json
+python spritepacker.py --image hero.png --image enemy.png -o atlas.png -m atlas.json
 
 # Recursive folder search
-python -m SpritePacker --input assets/ --recursive -o atlas.png -m atlas.json
+python spritepacker.py --input assets/ --recursive -o atlas.png -m atlas.json
 ```
 
 **CLI Options:**
