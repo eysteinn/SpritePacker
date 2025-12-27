@@ -9,8 +9,45 @@ Lightweight sprite atlas packer implemented with the MaxRects heuristic. Support
 - **Flexible metadata** - Export sprite coordinates as JSON or YAML
 - **Batch processing** - Add entire folders of images with one call
 - **Customizable** - Pluggable algorithm, multiple image modes (RGBA, RGB, LA, etc.)
+- **Command-line interface** - Use from terminal with full argument support
 
 ## Usage
+
+### Command Line
+
+Pack sprites from the command line using `python -m SpritePacker`:
+
+```bash
+# Pack a folder of images into a 1024x1024 atlas
+python -m SpritePacker --input sprites/ --output atlas.png --metadata atlas.json
+
+# Pack with custom settings and extrude mode
+python -m SpritePacker -i sprites/ -o atlas.png -m atlas.yaml --width 2048 --height 2048 --padding 4 --extrude
+
+# Add specific images
+python -m SpritePacker --image hero.png --image enemy.png -o atlas.png -m atlas.json
+
+# Recursive folder search
+python -m SpritePacker --input assets/ --recursive -o atlas.png -m atlas.json
+```
+
+**CLI Options:**
+- `-i, --input FOLDER` - Add all images from a folder (can be specified multiple times)
+- `--image FILE` - Add a specific image file (can be specified multiple times)
+- `--recursive` - Search folders recursively
+- `--extensions` - Comma-separated list of file extensions (default: .png,.jpg,.jpeg)
+- `--no-strip-path` - Use full paths as sprite names instead of relative paths
+- `-o, --output PATH` - Output path for atlas image(s) (use {page} for multi-page naming)
+- `-m, --metadata PATH` - Output path for metadata file (.json or .yaml extension)
+- `--width` - Atlas page width in pixels (default: 1024)
+- `--height` - Atlas page height in pixels (default: 1024)
+- `--padding` - Padding between sprites in pixels (default: 1)
+- `--background` - Background color as R,G,B or R,G,B,A (default: 0,0,0,0)
+- `--mode` - PIL image mode: RGBA, RGB, LA, or L (default: RGBA)
+- `--max-pages` - Maximum number of atlas pages (default: unlimited)
+- `--extrude` - Repeat edge pixels into padding to prevent texture bleeding
+
+### Python API
 
 ```python
 from SpritePacker import SpritePacker
